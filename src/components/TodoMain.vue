@@ -5,7 +5,7 @@
       <div class="view">
         <input v-model="item.isDone" class="toggle" type="checkbox" />
         <label>{{ item.name }}</label>
-        <button class="destroy"></button>
+        <button class="destroy" @click="del(item.id)"></button>
       </div>
     </li>
   </ul>
@@ -18,6 +18,11 @@ export default {
       type: Array,
       required: true,
     }
-  }
+  },
+  methods: {
+    del (id) {
+      this.$emit("del-event", id)
+    }
+  },
 }
 </script>

@@ -2,7 +2,7 @@
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
     <TodoHeader></TodoHeader>
-    <TodoMain :list="list"></TodoMain>
+    <TodoMain :list="list" @del-event="deltodolist"></TodoMain>
     <TodoFooter></TodoFooter>
   </section>
 </template>
@@ -26,6 +26,12 @@ export default {
         { id: 201, name: "睡觉", isDone: false },
         { id: 103, name: "打豆豆", isDone: true },
       ],
+    }
+  },
+  methods: {
+    deltodolist (Id) {
+      const index = this.list.findIndex(item => item.id === Id)
+      this.list.splice(index, 1)
     }
   },
   components: {
