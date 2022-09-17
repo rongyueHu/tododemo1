@@ -1,7 +1,7 @@
 <template>
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
-    <TodoHeader></TodoHeader>
+    <TodoHeader @add-event="addtodolist"></TodoHeader>
     <TodoMain :list="list" @del-event="deltodolist"></TodoMain>
     <TodoFooter></TodoFooter>
   </section>
@@ -29,9 +29,19 @@ export default {
     }
   },
   methods: {
+    //删除事件
     deltodolist (Id) {
       const index = this.list.findIndex(item => item.id === Id)
       this.list.splice(index, 1)
+    },
+    //添加事件
+    addtodolist (taskname) {
+      let id = this.list.length === 0 ? 100 : this.list[this.list.length - 1].id + 1
+      this.list.push({
+        id: id,
+        name: taskname,
+        isDone: false
+      })
     }
   },
   components: {
